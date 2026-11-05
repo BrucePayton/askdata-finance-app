@@ -39,6 +39,8 @@ pytest
 
 `PLATFORM_IMAGE` 应固定为不可变摘要。平台负责审核并注册清单；本仓库不会动态注入 Python 模块路径。
 
+完整的 Compose、网关、升级及回退规范见 [`deployment/README.md`](deployment/README.md)。
+
 ## 数据与安全边界
 
 - 数据源账户必须是只读账户，查询使用固定映射和有界读取。
