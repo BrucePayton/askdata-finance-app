@@ -1,0 +1,37 @@
+{
+  "name": "远景制造 · 财务管理账",
+  "as_of": "2026-08-31",
+  "periods": {
+    "table": "finance_monthly",
+    "columns": {
+      "period": "period",
+      "entity": "entity",
+      "revenue": "revenue",
+      "cost": "cost",
+      "opex": "opex",
+      "net_profit": "net_profit",
+      "budget_revenue": "budget_revenue",
+      "budget_cost": "budget_cost",
+      "budget_opex": "budget_opex",
+      "operating_cash": "operating_cash",
+      "investing_cash": "investing_cash",
+      "financing_cash": "financing_cash",
+      "opening_cash": "opening_cash",
+      "closing_cash": "closing_cash",
+      "assets_open": "assets_open",
+      "assets_close": "assets_close",
+      "equity_open": "equity_open",
+      "equity_close": "equity_close"
+    }
+  },
+  "receivables": {
+    "table": "finance_receivables",
+    "columns": {
+      "invoice": "invoice",
+      "entity": "entity",
+      "customer": "customer",
+      "due_date": "due_date",
+      "outstanding": "outstanding"
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "schema_version": "domain_application/v1",
+  "application_id": "finance",
+  "version": "2.0.0",
+  "platform_contract": "v1",
+  "domain_code": "function.finance",
+  "name": "财务智能分析中心",
+  "bindings": [
+    {"key": "accounting_knowledge", "kind": "knowledge_base"},
+    {"key": "finance_database", "kind": "database"}
+  ],
+  "resources": [
+    {"key": "finance-profit", "kind": "skill", "name": "盈利质量分析", "description": "管理口径利润、现金转换与适用限制", "execution": {"mode": "instructions", "skill_name": "finance-profit"}, "capabilities": ["skill.load"]},
+    {"key": "finance-budget", "kind": "skill", "name": "预算执行与差异分析", "description": "收入、成本、费用差异与闭合校验", "execution": {"mode": "instructions", "skill_name": "finance-budget"}, "capabilities": ["skill.load"]},
+    {"key": "finance-cash", "kind": "skill", "name": "现金流与资金分析", "description": "逐主体现金勾稽与利润现金转换", "execution": {"mode": "instructions", "skill_name": "finance-cash"}, "capabilities": ["skill.load"]},
+    {"key": "finance-receivables", "kind": "skill", "name": "应收与逾期风险分析", "description": "到期日分桶、历史快照和减值证据边界", "execution": {"mode": "instructions", "skill_name": "finance-receivables"}, "capabilities": ["skill.load"]},
+    {"key": "finance-dupont", "kind": "skill", "name": "杜邦与资本回报分析", "description": "平均余额、期间与年化口径", "execution": {"mode": "instructions", "skill_name": "finance-dupont"}, "capabilities": ["skill.load"]},
+    {"key": "finance-quality", "kind": "skill", "name": "财务数据质量检查", "description": "粒度、唯一键、金额精度和现金勾稽", "execution": {"mode": "instructions", "skill_name": "finance-quality"}, "capabilities": ["skill.load"]},
+    {"key": "finance-mcp", "kind": "mcp_server", "name": "财务只读分析 MCP", "description": "使用当前应用绑定的只读数据源执行确定性分析；注册不代表连接已验证", "database_binding": "finance_database", "database_env": {"FINANCE_DB_TYPE": "db_type", "FINANCE_DB_HOST": "host", "FINANCE_DB_PORT": "port", "FINANCE_DB_NAME": "database", "FINANCE_DB_USER": "username", "FINANCE_DB_PASSWORD": "password"}, "execution": {"transport": "stdio", "command": "python", "args": ["-m", "core.modules.finance.mcp_server"], "env": {"FINANCE_MAPPING_PATH": "assets/finance/mysql-mapping.json"}, "allowed_tools": ["finance_preflight", "finance_load_dataset", "finance_analyze", "finance_report"]}, "capabilities": ["mcp.discover", "mcp.invoke"]}
+  ],
+  "scenarios": [
+    {"id": "budget", "name": "预算执行分析", "skill": "finance-budget", "inputs": ["period", "entity", "budget_version"], "checks": ["zero_budget", "variance_reconciliation", "missing_attribution_dimensions"], "outputs": ["metrics", "table", "chart", "evidence", "warnings"]},
+    {"id": "cash", "name": "现金勾稽分析", "skill": "finance-cash", "inputs": ["period", "entity"], "checks": ["cash_reconciliation", "missing_adjustments"], "outputs": ["metrics", "table", "evidence", "warnings"]}
+  ]
+}

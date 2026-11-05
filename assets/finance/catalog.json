@@ -1,0 +1,363 @@
+{
+  "version": "2.0.0",
+  "apps": [
+    {
+      "id": "profit",
+      "title": "盈利质量分析",
+      "category": "经营分析",
+      "description": "穿透收入、成本与费用，连接利润表现和经营现金，识别盈利质量变化。",
+      "icon": "◈",
+      "metrics": [
+        "gross_margin",
+        "operating_profit",
+        "cash_conversion"
+      ],
+      "skill": "finance-profit"
+    },
+    {
+      "id": "budget",
+      "title": "预算执行与差异归因",
+      "category": "预算管理",
+      "description": "从预算经营利润到实际利润，以收入、成本、费用差异解释每一元偏离。",
+      "icon": "▥",
+      "metrics": [
+        "revenue_attainment",
+        "profit_variance"
+      ],
+      "skill": "finance-budget"
+    },
+    {
+      "id": "cash",
+      "title": "现金流与资金监控",
+      "category": "资金管理",
+      "description": "三类现金活动与期初期末余额勾稽，关注经营现金净流出及利润含金量。",
+      "icon": "≈",
+      "metrics": [
+        "operating_cash",
+        "closing_cash",
+        "cash_gap"
+      ],
+      "skill": "finance-cash"
+    },
+    {
+      "id": "receivables",
+      "title": "应收账龄与催收优先级",
+      "category": "营运资本",
+      "description": "按到期日拆分账龄，定位长账龄客户及待跟进单据，形成复核清单。",
+      "icon": "◷",
+      "metrics": [
+        "receivables",
+        "overdue"
+      ],
+      "skill": "finance-receivables"
+    },
+    {
+      "id": "dupont",
+      "title": "杜邦分析与资本回报",
+      "category": "经营分析",
+      "description": "拆解净利率、资产周转率与权益乘数，复核当月净资产收益率。",
+      "icon": "◇",
+      "metrics": [
+        "net_margin",
+        "asset_turnover",
+        "equity_multiplier",
+        "roe"
+      ],
+      "skill": "finance-dupont"
+    },
+    {
+      "id": "quality",
+      "title": "财务数据质量与勾稽",
+      "category": "风险内控",
+      "description": "校验期间粒度、重复键、现金勾稽与快照时点，保留可追溯的数据指纹。",
+      "icon": "⊞",
+      "metrics": [
+        "cash_gap"
+      ],
+      "skill": "finance-quality"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "revenue",
+      "name": "营业收入",
+      "formula": "Σ revenue",
+      "unit": "元",
+      "notes": "主体/月；管理口径，非含税开票金额"
+    },
+    {
+      "id": "gross_margin",
+      "name": "毛利率",
+      "formula": "(revenue - cost) / revenue",
+      "unit": "%",
+      "notes": "收入为零时不可计算"
+    },
+    {
+      "id": "operating_profit",
+      "name": "管理口径经营利润",
+      "formula": "revenue - cost - opex",
+      "unit": "元",
+      "notes": "不含未输入的其他收益等，不等同法定营业利润"
+    },
+    {
+      "id": "revenue_attainment",
+      "name": "收入预算达成率",
+      "formula": "revenue / budget_revenue",
+      "unit": "%",
+      "notes": "预算为零时不可计算；未月结只表示进度"
+    },
+    {
+      "id": "profit_variance",
+      "name": "经营利润预算差异",
+      "formula": "(revenue-cost-opex) - (budget_revenue-budget_cost-budget_opex)",
+      "unit": "元",
+      "notes": "正值有利；成本贡献=预算成本-实际成本"
+    },
+    {
+      "id": "operating_cash",
+      "name": "经营活动现金净流量",
+      "formula": "Σ operating_cash",
+      "unit": "元",
+      "notes": "当月流量，不是银行账户余额"
+    },
+    {
+      "id": "closing_cash",
+      "name": "期末现金余额",
+      "formula": "Σ closing_cash",
+      "unit": "元",
+      "notes": "与输入现金流口径一致"
+    },
+    {
+      "id": "cash_conversion",
+      "name": "净利润现金转换率",
+      "formula": "operating_cash / net_profit",
+      "unit": "倍",
+      "notes": "净利润≤0时不作绩效解释；零值不可计算"
+    },
+    {
+      "id": "cash_gap",
+      "name": "现金勾稽差额",
+      "formula": "closing_cash-opening_cash-operating_cash-investing_cash-financing_cash",
+      "unit": "元",
+      "notes": "按主体检查；容差0.01元，汇率等调节项应先标准化"
+    },
+    {
+      "id": "receivables",
+      "name": "应收未结余额",
+      "formula": "Σ outstanding",
+      "unit": "元",
+      "notes": "截止日快照；历史月份不可用"
+    },
+    {
+      "id": "overdue",
+      "name": "逾期应收余额",
+      "formula": "Σ outstanding where as_of > due_date",
+      "unit": "元",
+      "notes": "到期当天仍归未逾期，不推定信用减值"
+    },
+    {
+      "id": "net_margin",
+      "name": "净利率",
+      "formula": "net_profit / revenue",
+      "unit": "%",
+      "notes": "使用输入净利润，禁止由经营利润代替"
+    },
+    {
+      "id": "asset_turnover",
+      "name": "总资产周转率",
+      "formula": "revenue / ((assets_open+assets_close)/2)",
+      "unit": "次",
+      "notes": "当月，未年化"
+    },
+    {
+      "id": "equity_multiplier",
+      "name": "权益乘数",
+      "formula": "avg_assets / avg_equity",
+      "unit": "倍",
+      "notes": "期初期末平均余额，要求权益为正"
+    },
+    {
+      "id": "roe",
+      "name": "净资产收益率",
+      "formula": "net_profit / ((equity_open+equity_close)/2)",
+      "unit": "%",
+      "notes": "当月，未年化；不能与年度ROE直接比较"
+    }
+  ],
+  "skills": [
+    {
+      "id": "finance-profit",
+      "name": "盈利质量分析 Skill",
+      "path": "assets/skills/finance-profit/SKILL.md",
+      "version": "2.0.0",
+      "inputs": [
+        "periods",
+        "receivables",
+        "period",
+        "entity"
+      ],
+      "outputs": [
+        "gross_margin",
+        "operating_profit",
+        "cash_conversion"
+      ]
+    },
+    {
+      "id": "finance-budget",
+      "name": "预算执行与差异归因 Skill",
+      "path": "assets/skills/finance-budget/SKILL.md",
+      "version": "2.0.0",
+      "inputs": [
+        "periods",
+        "receivables",
+        "period",
+        "entity"
+      ],
+      "outputs": [
+        "revenue_attainment",
+        "profit_variance"
+      ]
+    },
+    {
+      "id": "finance-cash",
+      "name": "现金流与资金监控 Skill",
+      "path": "assets/skills/finance-cash/SKILL.md",
+      "version": "2.0.0",
+      "inputs": [
+        "periods",
+        "receivables",
+        "period",
+        "entity"
+      ],
+      "outputs": [
+        "operating_cash",
+        "closing_cash",
+        "cash_gap"
+      ]
+    },
+    {
+      "id": "finance-receivables",
+      "name": "应收账龄与催收优先级 Skill",
+      "path": "assets/skills/finance-receivables/SKILL.md",
+      "version": "2.0.0",
+      "inputs": [
+        "periods",
+        "receivables",
+        "period",
+        "entity"
+      ],
+      "outputs": [
+        "receivables",
+        "overdue"
+      ]
+    },
+    {
+      "id": "finance-dupont",
+      "name": "杜邦分析与资本回报 Skill",
+      "path": "assets/skills/finance-dupont/SKILL.md",
+      "version": "2.0.0",
+      "inputs": [
+        "periods",
+        "receivables",
+        "period",
+        "entity"
+      ],
+      "outputs": [
+        "net_margin",
+        "asset_turnover",
+        "equity_multiplier",
+        "roe"
+      ]
+    },
+    {
+      "id": "finance-quality",
+      "name": "财务数据质量与勾稽 Skill",
+      "path": "assets/skills/finance-quality/SKILL.md",
+      "version": "2.0.0",
+      "inputs": [
+        "periods",
+        "receivables",
+        "period",
+        "entity"
+      ],
+      "outputs": [
+        "cash_gap"
+      ]
+    }
+  ],
+  "mcp": [
+    {
+      "id": "finance-mcp",
+      "name": "财务分析 MCP",
+      "transport": "stdio",
+      "status": "available",
+      "command": "python -m core.modules.finance.mcp_server",
+      "tools": [
+        "finance_preflight", "finance_load_dataset",
+        "finance_analyze",
+        "finance_report"
+      ],
+      "resources": [
+        "finance://catalog"
+      ],
+      "description": "已实现的只读计算服务；需由平台运行环境配置启动。不会连接 ERP 或修改账务。"
+    }
+  ],
+  "templates": [
+    {
+      "id": "monthly",
+      "name": "月度经营分析报告",
+      "app_id": "overview",
+      "sections": [
+        "经营摘要",
+        "预算差异归因",
+        "异常与复核建议",
+        "应收账龄",
+        "口径与限制",
+        "复核记录"
+      ]
+    },
+    {
+      "id": "budget-review",
+      "name": "预算执行复盘",
+      "app_id": "budget",
+      "sections": [
+        "预算经营利润",
+        "三因素差异桥",
+        "实际经营利润",
+        "责任复核"
+      ]
+    },
+    {
+      "id": "cash-review",
+      "name": "资金与回款复核",
+      "app_id": "cash",
+      "sections": [
+        "经营现金",
+        "现金勾稽",
+        "逾期应收",
+        "待复核事项"
+      ]
+    }
+  ],
+  "connectors": [
+    {
+      "id": "json",
+      "name": "标准财务数据集",
+      "status": "ready",
+      "description": "导入通过Schema校验的JSON，所有分析重新计算。"
+    },
+    {
+      "id": "askdata",
+      "name": "AskData 工作空间",
+      "status": "configure",
+      "description": "复用平台认证与已挂载数据源；设置空间ID后可调用真实AI分析。"
+    },
+    {
+      "id": "erp",
+      "name": "ERP / 总账 / 资金系统",
+      "status": "planned",
+      "description": "需要企业科目映射、权限及接口配置；本版本不包含生产ERP连接器。"
+    }
+  ]
+}

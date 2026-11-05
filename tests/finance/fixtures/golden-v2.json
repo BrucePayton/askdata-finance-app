@@ -1,0 +1,19 @@
+{
+  "version": "finance-golden/v2",
+  "isolation": "test_only_not_business_data",
+  "human_review": "requires_finance_owner_signoff",
+  "cases": [
+    {"id": "profit-gold", "app": "profit", "mutation": "none", "expected": {"operating_profit": 300, "net_profit": 240}},
+    {"id": "budget-gold", "app": "budget", "mutation": "none", "expected": {"profit_variance": -90}},
+    {"id": "cash-gold", "app": "cash", "mutation": "none", "expected": {"cash_gap": 0}},
+    {"id": "aging-gold", "app": "receivables", "mutation": "invoice", "expected": {"receivables": 12.34, "overdue": 12.34}},
+    {"id": "dupont-gold", "app": "dupont", "mutation": "none", "expected": {"roe": 0.24}},
+    {"id": "quality-gold", "app": "quality", "mutation": "none", "expected": {"cash_gap": 0}},
+    {"id": "missing-period", "app": "profit", "mutation": "period", "reject": true},
+    {"id": "missing-budget", "app": "budget", "mutation": "budget", "reject": true},
+    {"id": "missing-cash", "app": "cash", "mutation": "cash", "reject": true},
+    {"id": "historical-snapshot", "app": "receivables", "mutation": "historical", "reject": true},
+    {"id": "negative-equity", "app": "dupont", "mutation": "equity", "reject": true},
+    {"id": "duplicate-key", "app": "quality", "mutation": "duplicate", "reject": true}
+  ]
+}

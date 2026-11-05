@@ -1,0 +1,18 @@
+{
+  "schema_version": "finance-dashboard-components/v1",
+  "version": "1.1.0",
+  "components": [
+    {"id": "finance-kpis", "kind": "kpi", "requires": ["revenue"], "topics": ["profit", "budget", "cash", "receivables", "dupont", "quality"]},
+    {"id": "entity-performance", "kind": "entity_compare", "requires": ["entity", "revenue", "profit", "cash"], "topics": ["profit", "budget", "cash", "quality"]},
+    {"id": "cash-profit-quality", "kind": "cash_quality", "requires": ["net_profit", "operating_cash"], "topics": ["profit", "cash", "dupont"]},
+    {"id": "revenue-profit-trend", "kind": "line", "requires": ["period_series", "revenue", "operating_profit"], "topics": ["profit", "budget", "quality"]},
+    {"id": "profit-variance-bridge", "kind": "waterfall", "requires": ["actual_budget_revenue_cost_opex"], "topics": ["profit", "budget"]},
+    {"id": "receivables-aging", "kind": "aging", "requires": ["receivables_snapshot", "due_date", "outstanding"], "topics": ["receivables", "cash", "quality"]},
+    {"id": "customer-exposure", "kind": "table", "requires": ["customer", "outstanding"], "topics": ["receivables"]},
+    {"id": "dupont-tree", "kind": "dupont", "requires": ["net_profit", "revenue", "average_assets", "positive_average_equity"], "topics": ["dupont"]},
+    {"id": "finance-risk-signals", "kind": "risk", "requires": ["rule_evaluation"], "topics": ["profit", "budget", "cash", "receivables", "dupont", "quality"]},
+    {"id": "expected-credit-loss-forecast", "kind": "forecast", "requires": ["historical_default_or_migration", "pd_lgd_ead", "current_conditions", "forward_looking_scenarios"], "topics": ["receivables"]},
+    {"id": "sales-driver-tree", "kind": "driver_tree", "requires": ["orders", "quantity_price_mix", "returns", "contract_performance_obligations"], "topics": ["profit", "budget"]},
+    {"id": "procurement-working-capital", "kind": "working_capital", "requires": ["purchase_orders", "inventory_movements", "accounts_payable", "supplier_payment_terms"], "topics": ["profit", "cash", "quality"]}
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "version": "finance-skills/v2",
+  "instruction_loading_is_execution": false,
+  "tools": ["finance_preflight", "finance_load_dataset", "finance_analyze"],
+  "required_output": ["fingerprint", "period", "entity", "calculation_contract", "preflight"],
+  "evidence_rules": ["企业事实必须引用同主体同期间数据指纹和指标", "方法论不作为企业事实证据", "金额计算必须来自工具", "冲突政策未裁决不得确定表述"],
+  "skills": [
+    {"id": "finance-profit", "app_id": "profit", "version": "2.0.0", "requires": ["revenue", "cost", "opex", "net_profit"], "counterexample": "经营利润不得替代净利润", "stop": "无所选期间数据", "positive_case": "profit-gold", "negative_case": "missing-period"},
+    {"id": "finance-budget", "app_id": "budget", "version": "2.0.0", "requires": ["budget_revenue", "budget_cost", "budget_opex"], "counterexample": "预算差异贡献不是量价因果效应", "stop": "预算字段缺失或口径未对齐", "positive_case": "budget-gold", "negative_case": "missing-budget"},
+    {"id": "finance-cash", "app_id": "cash", "version": "2.0.0", "requires": ["opening_cash", "closing_cash", "operating_cash", "investing_cash", "financing_cash"], "counterexample": "主体间正负勾稽差额不能抵销后称平衡", "stop": "现金字段缺失", "positive_case": "cash-gold", "negative_case": "missing-cash"},
+    {"id": "finance-receivables", "app_id": "receivables", "version": "2.0.0", "requires": ["receivables_snapshot", "due_date", "outstanding"], "counterexample": "长账龄不等于已确定坏账", "stop": "历史期间无快照或单据为空", "positive_case": "aging-gold", "negative_case": "historical-snapshot"},
+    {"id": "finance-dupont", "app_id": "dupont", "version": "2.0.0", "requires": ["net_profit", "revenue", "assets_open", "assets_close", "positive_equity"], "counterexample": "非正权益的ROE不得用于绩效判断", "stop": "收入为零或权益非正时不解读完整杜邦", "positive_case": "dupont-gold", "negative_case": "negative-equity"},
+    {"id": "finance-quality", "app_id": "quality", "version": "2.0.0", "requires": ["period", "entity", "currency", "unique_keys"], "counterexample": "规则未触发不等于审计保证", "stop": "重复键或空字段时停止计算并输出补充清单", "positive_case": "quality-gold", "negative_case": "duplicate-key", "report_composition": "综合报告先使用质量门禁，再按可用能力组合其余五类Skill；禁止自动填补缺失章节"}
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "askdata-finance": {
+      "command": "bash",
+      "args": ["deployments/deployment_finance/deploy-finance.sh", "exec", "-T", "askdata_backend", "python", "-m", "core.modules.finance.mcp_server"],
+      "description": "Run with the repository as working directory. Uses the isolated financial deployment and its read-only database account."
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "schema_version": "finance-methodology-sources/v1",
+  "accessed_on": "2026-09-09",
+  "license_policy": "外部材料版权归各原作者；仅登记链接并原创归纳方法，不上传或复制受版权保护全文；不代表事务所背书或审计意见。",
+  "sources": [
+    {"id":"pwc-working-capital-2025","publisher":"PwC","title":"Middle East Working Capital Study 2025","url":"https://www.pwc.com/m1/en/publications/middle-east-working-capital-study-2025.html","applicability":"营运资本分析框架；地区行业样本不能直接作为本企业阈值","summary":"结合应收、存货、应付周转观察资金占用，区分增长驱动与回款效率，避免只延长付款期。","license":"link-and-original-summary-only"},
+    {"id":"ey-apm","publisher":"EY","title":"Applying IFRS – Alternative Performance Measures","url":"https://www.ey.com/en_gl/technical/ifrs-technical-resources/applying-ifrs-alternative-performance-measures","applicability":"管理口径与报表口径对照；非本企业正式会计政策","summary":"管理指标补充法定报表但不能替代它；注明定义、调整项与可比性，并提供可验证的勾稽。","license":"link-and-original-summary-only"},
+    {"id":"kpmg-disclosure-2025","publisher":"KPMG","title":"Singapore Illustrative Financial Statements 2025","url":"https://kpmg.com/sg/en/insights/audit/singapore-illustrative-financial-statements-2025.html","applicability":"仅借鉴附注与交叉引用组织形式；新加坡准则不得自动适用于其他辖区","summary":"专业报告需要主体、期间、会计基础、重要判断与附注索引；示例不是完整披露清单。","license":"link-and-original-summary-only"},
+    {"id":"deloitte-cash-flow-2025","publisher":"Deloitte","title":"Capital in motion: Unlocking 2025 cash flow trends","url":"https://www.deloitte.com/us/en/dbriefs-webcasts/capital-in-motion-unlocking-2025-cash-flow-trends.html","applicability":"现金转换与行动优先级；不引用未访问的视频全文","summary":"增长、现金流与营运资本应分别衡量；行动建议应定位可改善的资金占用及责任人。","license":"link-and-original-summary-only"},
+    {"id":"cfa-analysis-2026","publisher":"CFA Institute","title":"Financial Analysis Techniques","url":"https://www.cfainstitute.org/insights/professional-learning/refresher-readings/2026/financial-analysis-techniques","applicability":"比率、趋势、同型比较方法；分析须说明使用限制","summary":"比率用于结构化比较，必须同时检查期间、行业及会计政策；单一比率不能证明经营根因。","license":"link-and-original-summary-only"},
+    {"id":"microsoft-ar2025","publisher":"Microsoft","title":"Microsoft 2025 Annual Report","url":"https://www.microsoft.com/investor/reports/ar25/","applicability":"借鉴管理层讨论、分部解释与现金流附注组织；不混入本地企业数据","summary":"将经营变动叙述与分部表现、现金流量及附注关联，并说明比较范围变化。","license":"link-and-original-summary-only"}
+  ]
+}
